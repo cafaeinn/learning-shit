@@ -1,8 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { color } = require('../../data/config.json');
 const { EmbedBuilder } = require('discord.js');
-const scraperModule = await import('@xct007/tiktok-scraper');
-const { default: TikTokScraper, someUtility } = scraperModule;
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,6 +13,9 @@ module.exports = {
 		.setDMPermission(false),
 
         async execute(interaction) {
+		const scraperModule = await import('@xct007/tiktok-scraper');
+                const { default: TikTokScraper, someUtility } = scraperModule;
+
         	let url = interaction.options.getString('url');
 		let result = await TikTokScraper(url, { parse: true, keys: ['desc_language']});
 		//result.download.nowm
